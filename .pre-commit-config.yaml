@@ -1,7 +1,16 @@
 repos:
   - repo: https://github.com/mineiros-io/pre-commit-hooks
-    rev: v0.5.0
+    rev: v0.5.1
     hooks:
       - id: terramate-fmt
       - id: terramate-generate
       - id: terraform-fmt
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.97.4 # https://github.com/antonbabenko/pre-commit-terraform/releases
+    hooks:
+      - id: terraform_docs
+        exclude: "terramate|stacks|generate_hcl"
+        args:
+          - --hook-config=--path-to-file=TF-README.md # Valid UNIX path. I.e. ../TFDOC.md or docs/README.md etc.
+          - --hook-config=--add-to-existing-file=true # Boolean. true or false
+          - --hook-config=--create-file-if-not-exist=true # Boolean. true or false
